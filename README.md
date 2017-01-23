@@ -1,3 +1,6 @@
 # project
 CMSC 12200 Winter
-test
+Edward Hayes
+Jinsung Kim
+Sangwoo Park
+Zhipeng Zhu
