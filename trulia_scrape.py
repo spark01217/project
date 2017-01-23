@@ -17,17 +17,27 @@ td1 = soup.find_all('tr', style='background-color: #FFFFFF;')
 td2 = soup.find_all('tr', style='background-color: #EDEFF2;')
 table_data = td1 + td2
 
-t = {}
-
+t = []
 for neighborhood in table_data:
     td_tags = neighborhood.find_all('td')
 
     name = td_tags[0].find('a').text
-    avg_listing = td_tags[1].text
-    avg_sale = td_tags[3].text
-    median_sale = td_tags[5].text
-    price_per_sqft = td_tags[7].text
+    avg_listing = td_tags[1].text.replace(',', '').replace('$', '')
+    avg_sale = td_tags[3].text.replace(',', '').replace('$', '')
+    median_sale = td_tags[5].text.replace(',', '').replace('$', '')
+    price_per_sqft = td_tags[7].text.replace(',', '').replace('$', '')
     trulia_popularity = td_tags[9].text
+
+    if not avg_listing == '-':
+        avg_listing = int(avg_listing)
+    if not avg_sale == '-':
+        avg_sale = int(avg_sale)
+    if not median_sale == '-':
+        median_sale = int(median_sale)
+    if not price_per_sqft == '-':
+        price_per_sqft = int(price_per_sqft)
+    if not trulia_popularity == '-':
+        trulia_popularity = int(trulia_popularity)
 
     tr = {  'Neighborhood': name,
             'Average Listing Price': avg_listing,
@@ -37,19 +47,18 @@ for neighborhood in table_data:
             'Trulia Popularity': trulia_popularity,
             }
 
-    tr = { name: [avg_listing, avg_sale, median_sale,
-                    price_per_sqft, trulia_popularity]}
-    t.update(tr)
+    t.append(tr)
 
+with open('trulia_scrape_data.csv', 'w') as output_file:
+    # fieldnames = ['Neighborhood',
+    # 'Average Listing Price',
+    # 'Average Sale Price',
+    # 'Median Sale Price',
+    # 'Price Per Sqft',
+    # 'Trulia Popularity']
+    fieldnames = t[0].keys()
+    writer = csv.DictWriter(output_file, fieldnames=fieldnames)
 
-
-    # csv_line = (
-    #     name + ',' +
-    #     avg_listing + ',' +
-    #     avg_sale + ',' +
-    #     median_sale + ',' +
-    #     price_per_sqft + ',' +
-    #     trulia_popularity + '\n'
-    #     )
-    #
-    # csv_full += csv_line
+    writer.writeheader()
+    for row in t:
+        writer.writerow(row)
