@@ -12,13 +12,22 @@ def get_request(url):
 
     Inputs:
         url: must be an absolute URL
+<<<<<<< HEAD
     
     Outputs: 
+=======
+
+    Outputs:
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
         request object or None
 
     Examples:
         get_request("http://www.cs.uchicago.edu")
     '''
+<<<<<<< HEAD
+=======
+
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
     if is_absolute_url(url):
         try:
             r = requests.get(url)
@@ -36,7 +45,11 @@ def get_request(url):
 def read_request(request):
     '''
     Return data from request object.  Returns result or "" if the read
+<<<<<<< HEAD
     fails...
+=======
+    fails..
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
     '''
 
     try:
@@ -45,6 +58,10 @@ def read_request(request):
         print("read failed: " + request.url)
         return ""
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
 def get_request_url(request):
     '''
     Extract true URL from the request
@@ -76,14 +93,22 @@ def convert_if_relative_url(current_url, new_url):
 
     Inputs:
         current_url: absolute URL
+<<<<<<< HEAD
         new_url: 
+=======
+        new_url:
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
 
     Outputs:
         new absolute URL or None, if cannot determine that
         new_url is a relative URL.
 
     Examples:
+<<<<<<< HEAD
         convert_if_relative_url("http://cs.uchicago.edu", "pa/pa1.html") yields 
+=======
+        convert_if_relative_url("http://cs.uchicago.edu", "pa/pa1.html") yields
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
             'http://cs.uchicago.edu/pa/pa.html'
 
         convert_if_relative_url("http://cs.uchicago.edu", "foo.edu/pa.html") yields
@@ -112,7 +137,11 @@ def convert_if_relative_url(current_url, new_url):
 
 ARCHIVES = "https://www.classes.cs.uchicago.edu/archive/2015/winter/12200-1/new.collegecatalog.uchicago.edu/thecollege/archives"
 LEN_ARCHIVES = len(ARCHIVES)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
 
 def is_url_ok_to_follow(url, limiting_domain):
     '''
@@ -120,7 +149,11 @@ def is_url_ok_to_follow(url, limiting_domain):
         url: absolute URL
         limiting domain: domain name
 
+<<<<<<< HEAD
     Outputs: 
+=======
+    Outputs:
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
         Returns True if the protocol for the URL is HTTP, the domain
         is in the limiting domain, and the path is either a directory
         or a file that has no extension or ends in .html. URLs
@@ -193,5 +226,8 @@ def find_sequence(tag):
             rv.append(sib_tag)
         sib_tag = sib_tag.next_sibling
     return rv
+<<<<<<< HEAD
         
 
+=======
+>>>>>>> 59973a1a74cddefbe5171edc58c7cc304915b797
