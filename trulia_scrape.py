@@ -49,7 +49,7 @@ for neighborhood in table_data:
 
     t.append(tr)
 
-with open('trulia_scrape_data.csv', 'w') as output_file:
+with open('data/trulia_scrape_data.csv', 'w') as output_file:
     # fieldnames = ['Neighborhood',
     # 'Average Listing Price',
     # 'Average Sale Price',
