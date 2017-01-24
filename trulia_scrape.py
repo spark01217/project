@@ -50,12 +50,6 @@ for neighborhood in table_data:
     t.append(tr)
 
 with open('data/trulia_scrape_data.csv', 'w') as output_file:
-    # fieldnames = ['Neighborhood',
-    # 'Average Listing Price',
-    # 'Average Sale Price',
-    # 'Median Sale Price',
-    # 'Price Per Sqft',
-    # 'Trulia Popularity']
     fieldnames = t[0].keys()
     writer = csv.DictWriter(output_file, fieldnames=fieldnames)
 
