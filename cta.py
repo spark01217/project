@@ -8,7 +8,7 @@ dta = dta.sort(['date','rides'], axis = 0, ascending =[True, False])
 # pd.dta.sort_values(['date', 'rides'], axis=0)
 dta['date'] = pd.to_datetime(dta['date'])
 dta = dta.groupby('date').head(10)
-dta = dta.groupby('date')['rides'].transform(sum)
+# dta = dta.groupby('date')['rides'].transform(sum)
 
 # dta.to_csv('/home/zpzhu/cs122-win-17-zpzhu/pa3/ui/project/cta_data.csv')
 def calctot(df):
@@ -18,13 +18,14 @@ def calctot(df):
     return df.append(df.sum(numeric_only=True), ignore_index=True)
 
 #groupby and reset index
-dta =  dta.groupby(['date']).apply(calctot).reset_index()
+nc =  dta.groupby('date').apply(calctot).reset_index()
 #delete old index column
-dta = dta.drop(['level_3'], axis=1)
+nc = nc.drop(['level_1'], axis=1)
+#add new column onto the dataframe
+dta['rides1'] = pd.Series(nc, index = dta['date'])
 #fill NaN to value tot
-dta['metrics'] = dta['metrics'].fillna('tot')
+dta['date'] = dta['date'].fillna('tot')
 
-# date_sort = dta.sort('date', 'rides')
 # # dta['date'] = dta.to_datetime(dta.Date)
 # # df.sort('Date')
 
