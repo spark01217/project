@@ -1,7 +1,11 @@
 import requests
 import os
 import zipfile
+<<<<<<< HEAD
 from io import StringIO
+=======
+import io
+>>>>>>> 8de00a561eeb01b3facefc429229f0f3b81182cd
 import glob
 import shapefile
 import tempfile
@@ -38,8 +42,7 @@ def download_shapefiles():
     """Retrieve the community area shapefiles from the Chicago open data portal
     and unzip them to data/"""
 
-    comm_area_url = ("https://data.cityofchicago.org/download/"
-                    "9wp7-iasj/application/zip")
+    comm_area_url = ("https://data.cityofchicago.org/download/9wp7-iasj/application/zip")
     try:
         os.mkdir("data")
     except OSError:
@@ -49,7 +52,11 @@ def download_shapefiles():
     # GET the zip file stored at ``comm_area_url`` and put it into an in-memory
     # buffer.  Extract the contents of the buffer to data/
     r = requests.get(comm_area_url)
+<<<<<<< HEAD
     f = StringIO()
+=======
+    f = io.BytesIO()
+>>>>>>> 8de00a561eeb01b3facefc429229f0f3b81182cd
     f.write(r.content)
     with zipfile.ZipFile(f, 'r') as zipf:
         zipf.extractall("data")
