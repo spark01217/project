@@ -39,7 +39,9 @@ KEYS = [
 'Environment Icon', 'Instruction Icon', 'Leaders Icon', 'Parent Engagement Icon',
 'Parent Environment Icon', 'Growth Overall Level', 'Student Performance Level',
 'Overall Foundation', 'Involved Families', 'Supportive Environment', 'Ambitious Instruction',
-'Effective Leaders', 'Collaborative Teachers', 'Safety'
+'Effective Leaders', 'Collaborative Teachers', 'Safety',
+# Lat/Long >
+'Latitude', 'Longitude', 'School_Longitude', 'School_Latitude'
 ]
 
 KEYS_LWR = []
@@ -99,13 +101,14 @@ def calculate_score(school, RATINGS_LWR):
     score = 0
     total = 0
     school_ratings = {}
+    not_keys = ['zip code', 'zip', 'latitude', 'longitude',
+                'school_longitude', 'school_latitude']
     for key in school.keys():
-        if not key == 'zip code':
-            if not key == 'zip':
-                school_ratings[key] = RATINGS_LWR[school[key]]
-                if not school_ratings[key] == None:
-                    score += school_ratings[key]
-                    total += 4
+        if not key in not_keys:
+            school_ratings[key] = RATINGS_LWR[school[key]]
+            if not school_ratings[key] == None:
+                score += school_ratings[key]
+                total += 4
 
     if total == 0:
         return None
@@ -129,9 +132,16 @@ def create_index(reports, RATINGS_LWR):
                 school_zip = school['zip']
             if 'zip code' in school.keys():
                 school_zip = school['zip code']
+            if 'latitude' in school.keys():
+                school_lat = school['latitude']
+                school_lon = school['longitude']
+            if 'school_latitude' in school.keys():
+                school_lat = school['school_latitude']
+                school_lon = school['school_longitude']
             school_score = calculate_score(school, RATINGS_LWR)
             if not school_score == None:
-                d = {'zip': int(school_zip), 'score': school_score}
+                d = {'zip': int(school_zip), 'score': school_score,
+                     'lat': float(school_lat), 'lon': float(school_lon)}
                 l.append(d)
 
         index[year] = l
@@ -199,7 +209,7 @@ def create_2015_data(aggregated_index, zipcodes):
     return aggregated_index
 
 
-def write_to_csv(aggregated_index):
+def write_ag_to_csv(aggregated_index):
     '''
     Create a csv file for each year from the nested dictionaries.
     '''
@@ -216,18 +226,38 @@ def write_to_csv(aggregated_index):
                 + str(year_dict[key]) + '\n')
 
 
+def write_index_to_csv(index):
+    '''
+    Create a csv file for each year from the nested dictionaries.
+    '''
+    filename = 'data/school_quality.csv'
+    with open(filename, 'w') as output_file:
+        for year in index:
+            year_list = index[year]
+            for school in year_list:
+                output_file.write(
+                str(year) + ', '
+                + str(school['lat']) + ', '
+                + str(school['lon']) + ', '
+                + str(school['zip']) + ', '
+                + str(school['score']) + '\n'
+                )
+
+
 if __name__ == "__main__":
 
     reports = create_reports(KEYS_LWR, FILES)
 
     index = create_index(reports, RATINGS_LWR)
 
-    zipcodes = create_zip_list(index)
+    write_index_to_csv(index)
 
-    aggregated_index = aggregate_by_zip(index, zipcodes)
-
-    aggregated_index = create_2015_data(aggregated_index, zipcodes)
-
-    write_to_csv(aggregated_index)
+    # zipcodes = create_zip_list(index)
+    #
+    # aggregated_index = aggregate_by_zip(index, zipcodes)
+    #
+    # aggregated_index = create_2015_data(aggregated_index, zipcodes)
+    #
+    # write_ag_to_csv(aggregated_index)
 
     print("--- %s seconds ---" % (time.time() - start_time))
