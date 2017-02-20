@@ -1,7 +1,7 @@
 import requests
 import os
 import zipfile
-import StringIO
+from io import StringIO
 import glob
 import shapefile
 import tempfile
@@ -49,7 +49,7 @@ def download_shapefiles():
     # GET the zip file stored at ``comm_area_url`` and put it into an in-memory
     # buffer.  Extract the contents of the buffer to data/
     r = requests.get(comm_area_url)
-    f = StringIO.StringIO()
+    f = StringIO()
     f.write(r.content)
     with zipfile.ZipFile(f, 'r') as zipf:
         zipf.extractall("data")
