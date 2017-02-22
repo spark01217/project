@@ -53,4 +53,5 @@ for i in df["neighborhood"]:
     l.append(m[i])
 df["code"] = pd.Series(l) 
 df.drop(df.columns[[2,3]], axis=1, inplace=True)
+df.columns = ['year', 'school', 'community']
 df.to_csv("school_data.csv")
