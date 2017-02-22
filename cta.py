@@ -1,14 +1,6 @@
-dta = pd.read_csv('/CTA_Ridership.csv')
+import pandas as pd
+import openpyxl
 
-dta = dta.sort(['date','rides'], axis = 0, ascending =[True, False])
-
-<<<<<<< HEAD
-# pd.dta.sort_values(['date', 'rides'], axis=0)
-dta['date'] = pd.to_datetime(dta['date'])
-dta = dta.groupby('date').head(10)
-# dta = dta.groupby('date')['rides'].transform(sum)
-
-=======
 dta = pd.read_csv('/home/student/project/CTA_Ridership.csv')
 
 dta = dta.sort(['date','rides'], axis = 0, ascending =[True, False])
@@ -18,7 +10,6 @@ dta['date'] = pd.to_datetime(dta['date'])
 dta = dta.groupby('date').head(10)
 # dta = dta.groupby('date')['rides'].transform(sum)
 
->>>>>>> 8de00a561eeb01b3facefc429229f0f3b81182cd
 # dta.to_csv('/home/zpzhu/cs122-win-17-zpzhu/pa3/ui/project/cta_data.csv')
 def calctot(df):
     #delete columns
@@ -35,159 +26,137 @@ nc = nc.drop(['level_1'], axis=1)
 # dta['rides1'] = pd.Series(nc, index = dta['date'])
 
 #fill NaN to value tot
-<<<<<<< HEAD
-dta['date'] = dta['date'].fillna('tot')
-=======
 dta['date'] = dta['date'].fillna('tot')
 date_sort = dta.sort('date')
-
-cid = pd.DataFrame('community code')
-
-for i in range(len(date_sort)):
-    cid.add(date_sort['stationname'].iloc(i))
     
 # dta['date'] = dta.to_datetime(dta.Date)
 # df.sort('Date')
 
+# a dictionary containing the area code for the stations
+name = {'18th': 31,
+ '35-Bronzeville-IIT': 35,
+ '35th/Archer': 59,
+ '43rd': 38,
+ '47th-Dan Ryan': 37,
+ '47th-South Elevated': 35,
+ '51st': 40,
+ '63rd-Dan Ryan': 68,
+ '69th': 69,
+ '79th': 44,
+ '87th': 44,
+ '95th/Dan Ryan': 49,
+ 'Adams/Wabash': 32,
+ 'Addison-Brown': 5,
+ 'Addison-North Main': 6,
+ "Addison-O'Hare": 16,
+ 'Argyle': 3,
+ 'Armitage': 7,
+ 'Ashland-Lake': 28,
+ 'Ashland-Orange': 31,
+ 'Ashland/63rd': 68,
+ 'Belmont-North Main': 6,
+ "Belmont-O'Hare": 21,
+ 'Berwyn': 77,
+ 'Bryn Mawr': 77,
+ 'California-Cermak': 30,
+ 'California-Lake': 27,
+ 'California/Milwaukee': 22,
+ 'Central Park': 29,
+ 'Central-Lake': 32,
+ 'Cermak-Chinatown': 33,
+ 'Cermak-McCormick Place': 33,
+ 'Chicago/Franklin': 8,
+ 'Chicago/Milwaukee': 24,
+ 'Chicago/State': 4,
+ 'Cicero-Forest Park': 25,
+ 'Cicero-Lake': 25,
+ 'Clark/Division': 32,
+ 'Clark/Lake': 32,
+ 'Clinton-Forest Park': 28,
+ 'Conservatory': 27,
+ 'Cumberland': 10,
+ 'Damen-Brown': 4,
+ 'Damen/Milwaukee': 24,
+ 'Diversey': 7,
+ 'Division/Milwaukee': 24,
+ 'East 63rd-Cottage Grove': 42,
+ 'Francisco': 14,
+ 'Fullerton': 7,
+ 'Garfield-Dan Ryan': 37,
+ 'Garfield-South Elevated': 40,
+ 'Grand/Milwaukee': 24,
+ 'Grand/State': 8,
+ 'Granville': 77,
+ 'Halsted-Orange': 31,
+ 'Halsted/63rd': 68,
+ "Harlem-O'Hare": 10,
+ 'Harrison': 32,
+ 'Homan': 27,
+ 'Howard': 1,
+ 'Indiana': 38,
+ 'Irving Park-Brown': 5,
+ 'Jackson/Dearborn': 32,
+ 'Jackson/State': 32,
+ 'Jarvis': 1,
+ 'Jefferson Park': 11,
+ 'Kedzie-Brown': 14,
+ 'Kedzie-Cermak': 29,
+ 'Kedzie-Homan-Forest Park': 27,
+ 'Kedzie-Lake': 27,
+ 'Kedzie-Midway': 63,
+ 'Kimball': 14,
+ 'King Drive': 42,
+ 'Kostner': 26,
+ 'LaSalle': 32,
+ 'LaSalle/Van Buren': 32,
+ 'Lake/State': 32,
+ 'Laramie': 25,
+ 'Lawrence': 3,
+ 'Library': 32,
+ 'Logan Square': 22,
+ 'Loyola': 1,
+ 'Madison/Wabash': 32,
+ 'Medical Center': 28,
+ 'Merchandise Mart': 32,
+ 'Midway Airport': 56,
+ 'Monroe/Dearborn': 32,
+ 'Monroe/State': 32,
+ 'Montrose-Brown': 4,
+ "Montrose-O'Hare": 14,
+ 'Morgan-Lake': 28,
+ 'Morse': 1,
+ 'North/Clybourn': 8,
+ "O'Hare Airport": 76,
+ 'Oak Park-Forest Park': 36,
+ 'Paulina': 6,
+ 'Polk': 28,
+ 'Pulaski-Cermak': 29,
+ 'Pulaski-Forest Park': 26,
+ 'Pulaski-Lake': 26,
+ 'Pulaski-Orange': 57,
+ 'Quincy/Wells': 32,
+ 'Racine': 28,
+ 'Randolph/Wabash': 32,
+ 'Rockwell': 4,
+ 'Roosevelt': 33,
+ 'Sedgwick': 8,
+ 'Sheridan': 6,
+ 'Southport': 6,
+ 'Sox-35th-Dan Ryan': 34,
+ 'State/Lake': 32,
+ 'Thorndale': 77,
+ 'UIC-Halsted': 28,
+ 'Washington/Dearborn': 32,
+ 'Washington/State': 32,
+ 'Washington/Wells': 32,
+ 'Wellington': 6,
+ 'Western-Brown': 4,
+ 'Western-Cermak': 31,
+ 'Western-Forest Park': 32,
+ 'Western-Orange': 58,
+ 'Western/Milwaukee': 22,
+ 'Wilson': 3}
 
-
-
-name = {}
-
-name['Austin-Forest Park'] = 0
-name['Harlem-Lake'] = 0
-name['Pulaski-Lake'] = 26
-name['Quincy/Wells'] = 32
-name['Davis'] = 0
-name["Belmont-O'Hare"] = 21
-name['Jackson/Dearborn'] = 32
-name['Sheridan'] = 6
-name['Damen-Brown'] = 04
-name['Morse'] = 01
-name['35th/Archer'] = 59
-name['51st'] = 40
-name['Skokie'] = 0
-name['Pulaski-Cermak'] = 29
-name['LaSalle/Van Buren'] = 32
-name['Ashland-Lake'] = 28
-name['Oak Park-Forest Park'] = 36
-name['Sox-35th-Dan Ryan'] = 34
-name['Randolph/Wabash'] = 32
-name['Damen-Cermak'] = 0
-name['Western-Forest Park'] = 32
-name['Cumberland'] = 10
-name['79th'] = 44
-name['Kedzie-Homan-Forest Park'] = 27
-name['State/Lake'] = 32
-name['Main'] = 0
-name['Central-Lake'] = 32
-name['Ashland/63rd'] = 68
-name['Indiana'] = 38
-name['Western-Orange'] = 58
-name['Division/Milwaukee'] = 24
-name['Grand/State'] = 08
-name['Berwyn'] = 77
-name['UIC-Halsted'] = 28
-name['Southport'] = 6
-name['Washington/Dearborn'] = 32
-name['Clark/Lake'] = 32
-name['Forest Park'] = 0
-name['Noyes'] = 0
-name['Cicero-Cermak'] = 0
-name['Clinton-Forest Park'] = 28
-name['California-Cermak'] = 30
-name['95th/Dan Ryan'] = 49
-name['Merchandise Mart'] = 32
-name['Racine'] = 28
-name['Cicero-Lake'] = 25
-name['Grand/Milwaukee'] = 24
-name['Washington/State'] = 32
-name['Garfield-South Elevated'] = 40
-name['Foster'] = 0
-name['Diversey'] = 07
-name['Wilson'] = 03
-name["Irving Park-O'Hare"] = 0
-name['Jackson/State'] = 32
-name['California/Milwaukee'] = 22
-name['54th/Cermak'] =0
-name['Damen/Milwaukee'] = 24
-name['Kostner'] = 26
-name['Ridgeland'] = 0
-name['Clark/Division'] = 32
-name['Madison/Wabash'] = 32
-name['North/Clybourn'] = 08
-name['Armitage'] = 07
-name['Western/Milwaukee'] = 22
-name['Adams/Wabash'] = 32
-name['Laramie'] = 25
-name['Chicago/Franklin'] = 08
-name['East 63rd-Cottage Grove'] = 42
-name['Washington/Wells'] = 32
-name['Western-Cermak'] = 31
-name["Harlem-O'Hare"] = 10 
-name['Granville'] = 77
-name['Lawrence'] = 03
-name['Central Park'] = 29
-name['Monroe/Dearborn'] = 32
-name['Sedgwick'] = 08
-name['Medical Center'] = 28
-name['18th'] = 31
-name['Library'] = 32
-name['Francisco'] = 14
-name['Thorndale'] = 77
-name["O'Hare Airport"] = 76
-name['Howard'] = 01
-name['63rd-Dan Ryan'] = 68
-name['Pulaski-Forest Park'] = 26
-name['Midway Airport'] = 56
-name['Halsted/63rd'] = 68 
-name['Pulaski-Orange'] = 57
-name['Cicero-Forest Park'] = 25
-name['69th'] = 69
-name['Cermak-Chinatown'] = 33
-name['Rockwell'] = 04
-name['Logan Square'] = 22
-name['Polk'] = 28
-name['Kedzie-Cermak'] = 29
-name['Ashland-Orange'] = 31
-name['Kedzie-Lake'] = 27
-name['47th-South Elevated'] = 35
-name['Monroe/State'] = 32
-name['35-Bronzeville-IIT'] = 35
-name['Halsted-Orange'] = 31
-name['King Drive'] = 42
-name['Kedzie-Midway'] = 63
-name['Garfield-Dan Ryan'] = 37
-name['Kedzie-Brown'] = 14
-name['Jarvis'] = 01
-name['Argyle'] = 03
-name['Wellington'] = 06
-name['Fullerton'] = 07
-name['47th-Dan Ryan'] = 37
-name["Addison-O'Hare"] = 16
-name['43rd'] = 38
-name['Jefferson Park'] = 11
-name['Kimball'] = 14
-name['Loyola'] = 01
-name['Paulina'] = 06
-name['Belmont-North Main'] = 06
-name["Montrose-O'Hare"] = 14
-name['LaSalle'] = 32
-name['California-Lake'] = 27
-name['Bryn Mawr'] = 77
-name['Roosevelt'] = 33
-name['Chicago/Milwaukee'] = 24
-name['Addison-North Main'] = 06
-name['87th'] = 44
-name['Addison-Brown'] = 05
-name['Chicago/State'] = 04
-name['Irving Park-Brown'] = 05
-name['Western-Brown'] = 04
-name['Harrison'] = 32
-name['Montrose-Brown'] = 04
-name['Lake/State'] = 32
-name['Conservatory'] = 27
-name['Homan'] = 27
-name['Morgan-Lake'] = 28
-name['Cermak-McCormick Place'] =33
->>>>>>> 8de00a561eeb01b3facefc429229f0f3b81182cd
+date_sort["community code"] = date_sort["stationname"].replace(name, inplace=False)
+date_sort = date_sort[date_sort["date"] >= "2012-01-01"]
+date_sort.to_csv("cta_data.csv")
