@@ -102,7 +102,7 @@ def get_neighborhood_for_point(lat, lng, commareas):
     inside.  The third argument to this function is the output from
     get_community_area_coords()"""
 
-    for commarea, commdata in commareas.iteritems():
+    for commarea, commdata in commareas.items():
         if point_inside_polygon(lng, lat, commdata):
             return commarea
     else:
