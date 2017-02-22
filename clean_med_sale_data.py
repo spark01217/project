@@ -27,4 +27,4 @@ for i in range(len(map)):
 combined["community"].replace(m, inplace = True)
 combined = combined[combined["date"]>="2012-01-01"]
 combined = combined.reset_index(drop=True)
-combined.to_csvl("final_med_price_data.csv")
+combined.to_csv("final_med_price_data.csv")
