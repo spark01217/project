@@ -157,6 +157,8 @@ name = {'18th': 31,
  'Western/Milwaukee': 22,
  'Wilson': 3}
 
-date_sort["community code"] = date_sort["stationname"].replace(name, inplace=False)
+date_sort["community"] = date_sort["stationname"].replace(name, inplace=False)
 date_sort = date_sort[date_sort["date"] >= "2012-01-01"]
-date_sort.to_csv("cta_data.csv")
+date_sort = date_sort.reset_index(drop=True)
+date_sort = date_sort.drop(date_sort.columns[[0,1,3]], axis=1)
+date_sort.to_csv("final_cta_data.csv")
