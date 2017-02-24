@@ -2,8 +2,7 @@ import openpyxl
 import glob, os
 import pandas as pd
 
-# directory: project/med_sale_data
-excel_names = glob.glob("*.csv")
+excel_names = glob.glob("/med_sale_data/*.csv")
 excels = []
 for name in sorted(excel_names):
    alt = pd.read_csv(name)
@@ -11,7 +10,6 @@ for name in sorted(excel_names):
    excels.append(alt)
 combined = pd.concat(excels)
 
-# directory: project
 id = pd.read_csv("id_name.csv")
 id.name[id.name=="Lake view"] = "Lake View"
 m = {}
@@ -20,8 +18,7 @@ for i in range(len(id)):
 combined["community"] = combined["community"].astype(int)
 combined["community"].replace(m, inplace=True)
 
-# directory: project/data
-map = pd.read_csv('Community Area populations.csv')
+map = pd.read_csv('/data/Community Area populations.csv')
 for i in range(len(map)):
     m[map["Community Area"][i].strip()] = map["Num"][i]
 combined["community"].replace(m, inplace = True)

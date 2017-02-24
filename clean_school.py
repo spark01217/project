@@ -6,11 +6,9 @@ pip3 install --user -r requirements.txt
 sudo pip3 install shapefile
 sudo pip3 install pyshp
 """
-
 run chicago_community_areas.py
 areas = get_community_area_coords()
-cd data
-df = pd.read_csv('school_quality.csv', header=None)
+df = pd.read_csv('/data/school_quality.csv', header=None)
 lng1 = df.loc[:,1][0:1880]
 lng2 = df.loc[:,1][1880:] 
 lat1 = df.loc[:,2][0:1880]
