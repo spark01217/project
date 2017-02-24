@@ -1,36 +1,9 @@
 import pandas as pd
 import openpyxl
-
-dta = pd.read_csv('/home/student/project/CTA_Ridership.csv')
-
-dta = dta.sort(['date','rides'], axis = 0, ascending =[True, False])
-
-# pd.dta.sort_values(['date', 'rides'], axis=0)
-dta['date'] = pd.to_datetime(dta['date'])
-dta = dta.groupby('date').head(10)
-# dta = dta.groupby('date')['rides'].transform(sum)
-
-# dta.to_csv('/home/zpzhu/cs122-win-17-zpzhu/pa3/ui/project/cta_data.csv')
-def calctot(df):
-    #delete columns
-    df = df.drop(['station_id', 'stationname', 'date', 'daytype'], axis = 1)
-    #append sum row, ignoring non-numeric column metrics
-    return df.append(df.sum(numeric_only=True), ignore_index=True)
-
-#groupby and reset index
-nc =  dta.groupby('date').apply(calctot).reset_index()
-#delete old index column
-nc = nc.drop(['level_1'], axis=1)
-#add new column onto the dataframe
-
-# dta['rides1'] = pd.Series(nc, index = dta['date'])
-
-#fill NaN to value tot
-dta['date'] = dta['date'].fillna('tot')
-date_sort = dta.sort('date')
-    
-# dta['date'] = dta.to_datetime(dta.Date)
-# df.sort('Date')
+# run the code in the project folder.
+dta = pd.read_csv('CTA_Ridership.csv')
+dta = dta.sort_values(by=['date','rides'], axis = 0, ascending =[True, False])
+dta["date"] = pd.to_datetime(dta["date"])
 
 # a dictionary containing the area code for the stations
 name = {'18th': 31,
@@ -157,8 +130,13 @@ name = {'18th': 31,
  'Western/Milwaukee': 22,
  'Wilson': 3}
 
-date_sort["community"] = date_sort["stationname"].replace(name, inplace=False)
-date_sort = date_sort[date_sort["date"] >= "2012-01-01"]
-date_sort = date_sort.reset_index(drop=True)
-date_sort = date_sort.drop(date_sort.columns[[0,1,3]], axis=1)
+dta["community"] = dta["stationname"].replace(name, inplace=False)
+dta["community"] = pd.to_numeric(dta["community"], errors = 'coerce')
+dta = dta.dropna()
+dta = dta[dta["date"] >= "2012-01-01"]
+years = pd.Series([x.year for x in dta["date"]])
+dta = dta.reset_index(drop=True)
+dta["date"] = years
+dta = dta.drop(dta.columns[[0,1,3]], axis=1)
+dta = dta.groupby(['community', "date"]).sum().reset_index()
 date_sort.to_csv("final_cta_data.csv")
