@@ -1,3 +1,10 @@
+#
+# ATTN Graders:
+#
+# This util file was provided in PA2. It had some useful functions
+# for use with BeautifulSoup that we used for our web scraping.
+#
+
 import urllib.parse
 import requests
 import os
@@ -11,8 +18,8 @@ def get_request(url):
     read the data.
     Inputs:
         url: must be an absolute URL
-    
-    Outputs: 
+
+    Outputs:
         request object or None
     Examples:
         get_request("http://www.cs.uchicago.edu")
@@ -42,6 +49,7 @@ def read_request(request):
     except:
         print("read failed: " + request.url)
         return ""
+
 
 def get_request_url(request):
     '''
@@ -73,12 +81,12 @@ def convert_if_relative_url(current_url, new_url):
     URL.  Will add the protocol, if that is all that is missing.
     Inputs:
         current_url: absolute URL
-        new_url: 
+        new_url:
     Outputs:
         new absolute URL or None, if cannot determine that
         new_url is a relative URL.
     Examples:
-        convert_if_relative_url("http://cs.uchicago.edu", "pa/pa1.html") yields 
+        convert_if_relative_url("http://cs.uchicago.edu", "pa/pa1.html") yields
             'http://cs.uchicago.edu/pa/pa.html'
         convert_if_relative_url("http://cs.uchicago.edu", "foo.edu/pa.html") yields
             'http://foo.edu/pa.html'
@@ -106,14 +114,14 @@ def convert_if_relative_url(current_url, new_url):
 
 ARCHIVES = "https://www.classes.cs.uchicago.edu/archive/2015/winter/12200-1/new.collegecatalog.uchicago.edu/thecollege/archives"
 LEN_ARCHIVES = len(ARCHIVES)
-    
+
 
 def is_url_ok_to_follow(url, limiting_domain):
     '''
     Inputs:
         url: absolute URL
         limiting domain: domain name
-    Outputs: 
+    Outputs:
         Returns True if the protocol for the URL is HTTP, the domain
         is in the limiting domain, and the path is either a directory
         or a file that has no extension or ends in .html. URLs
@@ -166,11 +174,13 @@ def is_subsequence(tag):
     return isinstance(tag, bs4.element.Tag) and 'class' in tag.attrs \
         and tag['class'] == ['courseblock', 'subsequence']
 
+
 def is_whitespace(tag):
     '''
     Does the tag represent whitespace?
     '''
     return isinstance(tag, bs4.element.NavigableString) and (tag.strip() == "")
+
 
 def find_sequence(tag):
     '''
