@@ -131,4 +131,4 @@ dta["community"] = pd.Series(list(range(1,78)))
 dta["cta"] = 0
 for i in name.items():
     dta.set_value(i[1]-1, "cta", 1)
-dta.to_csv("final_cta_data.csv")
+dta.to_csv("final_cta_data.csv", index=False)

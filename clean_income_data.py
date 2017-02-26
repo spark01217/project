@@ -40,5 +40,5 @@ df = df.drop(df.columns[[1,2]], axis=1)
 
 df.columns = ['community', '2012_Income', '2013_Income', '2014_Income', '2015_Income', '2016_Income']
 
-df.to_csv('final_data/final_income_data.csv')
+df.to_csv('final_data/final_income_data.csv', index=False)
 
