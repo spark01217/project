@@ -26,6 +26,10 @@ combined = combined[(combined["date"]>="2012-01-01") & (combined["date"]<"2017-0
 combined["date"] = pd.to_datetime(combined["date"])
 years = pd.Series([x.year for x in combined["date"]])
 combined["date"] = years
+combined.loc[204] = [2012, 58500, 54]
+combined.loc[205] = [2013, 58500, 54]
+combined.loc[206] = [2014, 52500, 54]
+combined.loc[207] = [2015, 79000, 54]
 combined = combined.groupby(['community', "date"]).sum().reset_index()
 combined["value"] = combined["value"].astype(int)
 combined = combined.sort_values(by="community")
