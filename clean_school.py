@@ -1,10 +1,14 @@
 import openpyxl
 import pandas as pd
 """
-sudo apt-get install gdal-bin
-pip3 install --user -r requirements.txt
-sudo pip3 install shapefile
-sudo pip3 install pyshp
+The geocoding library cannot be installed in CSIL desktops.
+Please install them via your VM.
+
+sudo apt-get install gdal-bin (VM)
+sudo pip3 install -r requirements.txt (VM)
+sudo pip3 install pyshp (VM)
+
+The installation will fail if you don't keep the installation order.
 """
 run chicago_community_areas.py
 areas = get_community_area_coords()
