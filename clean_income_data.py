@@ -7,15 +7,38 @@ df = df.reset_index(drop=True)
 l = list(range(1, 78))
 df["community"] = pd.Series(l)
 df = df.drop(df.index[77])
-df["2012"] = df["2010"].str.replace("$", "")
-df["2012"] = df["2011"].str.replace("$", "")
+df["2010"] = df["2010"].str.replace("$", "")
+df["2011"] = df["2011"].str.replace("$", "")
 df["2012"] = df["2012"].str.replace("$", "")
-df["2012"] = df["2010"].str.replace(",", "")
-df["2012"] = df["2011"].str.replace(",", "")
+df["2010"] = df["2010"].str.replace(",", "")
+df["2011"] = df["2011"].str.replace(",", "")
 df["2012"] = df["2012"].str.replace(",", "")
 df["2010"] = df["2010"].astype(int)
 df["2011"] = df["2011"].astype(int)
 df["2012"] = df["2012"].astype(int)
 df["community"] = df["community"].astype(int)
-df.to_csv("cleaned_income_data.csv")
+e_2013 = []
+e_2014 = []
+e_2015 = []
+e_2016 = []
+
+for i in range(len(df)):
+	a = df['2011'][i] - df['2010'][i]
+	b = df['2012'][i] - df['2011'][i]
+	avg = (a+b)/2
+	e_2013.append(df['2012'][i] + avg)
+	e_2014.append(df['2012'][i] + 2*avg)
+	e_2015.append(df['2012'][i] + 3*avg)
+	e_2016.append(df['2012'][i] + 4*avg)
+
+df['2013'] = pd.Series(e_2013).astype(int)
+df['2014'] = pd.Series(e_2014).astype(int)
+df['2015'] = pd.Series(e_2015).astype(int)
+df['2016'] = pd.Series(e_2016).astype(int)
+
+df = df.drop(df.columns[[1,2]], axis=1)
+
+df.columns = ['community', '2012_Income', '2013_Income', '2014_Income', '2015_Income', '2016_Income']
+
+df.to_csv('final_data/final_income_data.csv')
 

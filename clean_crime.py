@@ -3,10 +3,10 @@ import pandas as pd
 from math import isnan
 
 data = pd.read_csv('Cleaned_Crimes.csv')
-population = pd.read_csv("Community Area populations.csv", index_col = "Num")
+population = pd.read_csv("data/Community Area populations.csv", index_col = "Num")
 
 
-data = data[['Primary Type', 'Community Area', 'FBI Code', 'Year']]
+data = data[['Community Area', 'FBI Code', 'Year']]
 
 pop = {2012: [], 2013:[], 2014:[], 2015:[], 2016: []}
 pop_2010 = list(population["2010"])
@@ -60,5 +60,7 @@ for i in range(2012, 2017):
 		year.append(i)
 		neighbor.append(j)
 
-final_list = pd.DataFrame({'Year': year, 'Index Crime Rate': result, 'Neighborhood': neighbor}, index = neighbor)
+final_list = pd.DataFrame({'Year': year, 'Index Crime Rate': result, 'community': neighbor}, index = neighbor)
+final_list = final_list.pivot_table("Index Crime Rate", "community", "Year")
+final_list.columns = ["2012_Crime", "2013_Crime", "2014_Crime", "2015_Crime", "2016_Crime"]
 final_list.to_csv('final_crime_data.csv')

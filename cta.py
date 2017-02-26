@@ -1,5 +1,6 @@
 import pandas as pd
 
+dta = pd.read_csv('CTA_Ridership.csv')
 # a dictionary containing the area code for the stations
 name = {'18th': 31,
  '35-Bronzeville-IIT': 35,
@@ -126,8 +127,8 @@ name = {'18th': 31,
  'Wilson': 3}
 
 dta = pd.DataFrame()
-dta["community"] = pd.Series(list(range(0,78)))
+dta["community"] = pd.Series(list(range(1,78)))
 dta["cta"] = 0
 for i in name.items():
-    dta.set_value(i[1], "cta", 1)
+    dta.set_value(i[1]-1, "cta", 1)
 dta.to_csv("final_cta_data.csv")
