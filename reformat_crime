@@ -1,0 +1,20 @@
+import pandas as pd
+
+b = pd.read_csv('final_crime_data.csv')
+
+final_crime = pd.DataFrame()
+
+crime_2012
+crime_2013
+crime_2014
+crime_2015
+
+final_crime.columns = ['community', '2012_crime', '2013_crime', '2014_crime', '2015_crime', '2016_crime']
+
+final_crime['community'] = b['Neighborhood'][0:77]
+
+final_crime['2012_crime'] = b['Index Crime Rate'][0:77]
+final_crime['2013_crime'] = b['Index Crime Rate'][78:154]
+final_crime['2014_crime'] = b['Index Crime Rate'][155:231]
+final_crime['2015_crime'] = b['Index Crime Rate'][232:308]
+final_crime['2016_crime'] = b['Index Crime Rate'][309:385]
