@@ -30,8 +30,8 @@ combined.loc[204] = [2012, 58500, 54]
 combined.loc[205] = [2013, 58500, 54]
 combined.loc[206] = [2014, 52500, 54]
 combined.loc[207] = [2015, 79000, 54]
-combined = combined.groupby(['community', "date"]).sum().reset_index()
-combined["value"] = combined["value"].astype(int)
-combined = combined.sort_values(by="community")
-combined = combined.reset_index(drop=True)
+
+combined = combined.pivot_table("value", "community", "date")
+combined.columns = ["2012_Price", "2013_Price", "2014_Price", "2015_Price", "2016_Price"]
+combined = combined.astype(int)
 combined.to_csv("final_med_price_data.csv")
