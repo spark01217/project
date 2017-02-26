@@ -12,15 +12,16 @@ The installation will fail if you don't keep the installation order.
 """
 run chicago_community_areas.py
 areas = get_community_area_coords()
-df = pd.read_csv('/data/school_quality.csv', header=None)
+
+df = pd.read_csv('data/school_quality.csv', header=None)
 lng1 = df.loc[:,1][0:1880]
 lng2 = df.loc[:,1][1880:] 
 lat1 = df.loc[:,2][0:1880]
 lat2 = df.loc[:,2][1880:]
 df["lat"] = lat1.append(lng2)
 df["lng"] = lng1.append(lat2)
-df['neighborhood'] = df.apply(lambda col: get_neighborhood_for_point(col["lng"], col["lat"], areas), axis=1)
-map = pd.read_csv('Community Area populations.csv')
+df['community'] = df.apply(lambda col: get_neighborhood_for_point(col["lng"], col["lat"], areas), axis=1)
+map = pd.read_csv('data/Community Area populations.csv')
 map["Community Area"] = map["Community Area"].str.strip()
 df.drop(df.columns[[1,2,3]], axis=1, inplace=True)
 
@@ -50,10 +51,9 @@ m["Sheffield & DePaul"] = 7
 m["Boystown"] = 6
 m["Rush & Division"] = 8
 
-l = []
-for i in df["neighborhood"]:
-    l.append(m[i])
-df["code"] = pd.Series(l) 
+df["community"].replace(m, inplace=True) 
 df.drop(df.columns[[2,3]], axis=1, inplace=True)
-df.columns = ['year', 'school', 'community']
+df.columns = ['year', 'score', 'community']
+df = df.pivot_table("score", "community", "year")
+df.columns = ["community", "2012_Score", "2013_Score", "2014_Score", "2015_Score", "2016_Score"]
 df.to_csv("school_data.csv")
