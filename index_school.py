@@ -53,7 +53,6 @@ FILES = [
 'school_reports/2013.csv',
 'school_reports/2014.csv',
 'school_reports/2016.csv',
-'school_reports/2017.csv'
 ]
 
 

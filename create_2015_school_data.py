@@ -27,7 +27,7 @@ def convert_data_structure(data):
     Converts the dataset from a list of lists to a a list of dictionaries.
     """
 
-    l_2012, l_2013, l_2014, l_2016, l_2017 = [], [], [], [], []
+    l_2012, l_2013, l_2014, l_2016 = [], [], [], []
 
     codes = []
 
@@ -49,10 +49,8 @@ def convert_data_structure(data):
             l_2014.append(d)
         if year == '2016':
             l_2016.append(d)
-        if year == '2017':
-            l_2017.append(d)
 
-    data_dict = {2012: l_2012, 2013: l_2013, 2014: l_2014, 2016: l_2016, 2017: l_2017}
+    data_dict = {2012: l_2012, 2013: l_2013, 2014: l_2014, 2016: l_2016}
 
     codes = list(set(codes))
 
