@@ -90,10 +90,8 @@ def create_reports(KEYS_LWR, FILES):
 def calculate_score(school, RATINGS_LWR):
     '''
     Calculate an overall score for the quality of a school.
-
     Inputs:
         school (dict)
-
     Returns;
         score_pct (int)
     '''
@@ -151,7 +149,6 @@ def create_index(reports, RATINGS_LWR):
 def create_zip_list(index):
     '''
     Makes a list of all the zip codes in the inputted dict.
-
     Returns: list of zip codes
     '''
     zipcodes = []

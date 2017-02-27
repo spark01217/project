@@ -14,16 +14,18 @@ run chicago_community_areas.py
 areas = get_community_area_coords()
 
 df = pd.read_csv('data/school_quality.csv', header=None)
-lng1 = df.loc[:,1][0:1880]
-lng2 = df.loc[:,1][1880:] 
-lat1 = df.loc[:,2][0:1880]
-lat2 = df.loc[:,2][1880:]
+
+lng1 = df.loc[:,1][0:1218]
+lng2 = df.loc[:,1][1218:] 
+lat1 = df.loc[:,2][0:1218]
+lat2 = df.loc[:,2][1218:]
 df["lat"] = lat1.append(lng2)
 df["lng"] = lng1.append(lat2)
 df['community'] = df.apply(lambda col: get_neighborhood_for_point(col["lng"], col["lat"], areas), axis=1)
+
 map = pd.read_csv('data/Community Area populations.csv')
 map["Community Area"] = map["Community Area"].str.strip()
-df.drop(df.columns[[1,2,3]], axis=1, inplace=True)
+df.drop(df.columns[[1,2,3,5,6]], axis=1, inplace=True)
 
 m = {}
 for i in range(len(map)):
@@ -51,9 +53,14 @@ m["Sheffield & DePaul"] = 7
 m["Boystown"] = 6
 m["Rush & Division"] = 8
 
-df["community"].replace(m, inplace=True) 
-df.drop(df.columns[[2,3]], axis=1, inplace=True)
+df["community"].replace(m, inplace=True)
 df.columns = ['year', 'score', 'community']
 df = df.pivot_table("score", "community", "year")
+df[2015] = (df[2014]+df[2016])/2
+df.loc[26] = [54, 52, 60, 57, 58]
+df.loc[67] = [42, 39, 54, 51, 53]
+df = df.reset_index()
+df = df.sort_index(by=["community"])
+df = df.astype(int)
 df.columns = ["community", "2012_Score", "2013_Score", "2014_Score", "2015_Score", "2016_Score"]
-df.to_csv("school_data.csv")
+df.to_csv("final_data/final_school_data.csv", index=False)
