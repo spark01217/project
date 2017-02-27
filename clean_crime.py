@@ -60,7 +60,7 @@ for i in range(2012, 2017):
 		year.append(i)
 		neighbor.append(j)
 
-final_list = pd.DataFrame({'Year': year, 'Index Crime Rate': result, 'community': neighbor}, index = neighbor)
+final_list = pd.DataFrame({'date': year, 'crime_freq': result, 'community': neighbor}, index = neighbor)
 final_list = final_list.pivot_table("Index Crime Rate", "community", "Year")
 final_list.columns = ["2012_Crime", "2013_Crime", "2014_Crime", "2015_Crime", "2016_Crime"]
 final_list.to_csv('final_crime_data.csv')
