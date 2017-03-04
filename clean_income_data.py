@@ -37,8 +37,12 @@ df['2015'] = pd.Series(e_2015).astype(int)
 df['2016'] = pd.Series(e_2016).astype(int)
 
 df = df.drop(df.columns[[1,2]], axis=1)
-
-df.columns = ['community', '2012_Income', '2013_Income', '2014_Income', '2015_Income', '2016_Income']
+df = df.unstack()
+df = df[77:]
+df = df.to_frame()
+df = pd.DataFrame(df.to_records())
+df.columns = ["date", "community", "income"]
+df["community"] += 1
 
 df.to_csv('final_data/final_income_data.csv', index=False)
 
