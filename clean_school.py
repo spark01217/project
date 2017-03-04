@@ -54,13 +54,15 @@ m["Boystown"] = 6
 m["Rush & Division"] = 8
 
 df["community"].replace(m, inplace=True)
-df.columns = ['year', 'score', 'community']
-df = df.pivot_table("score", "community", "year")
+df.columns = ['date', 'score', 'community']
+df = df.pivot_table("score", "community", "date")
 df[2015] = (df[2014]+df[2016])/2
 df.loc[26] = [54, 52, 60, 57, 58]
 df.loc[67] = [42, 39, 54, 51, 53]
-df = df.reset_index()
-df = df.sort_index(by=["community"])
+df = df.unstack(level=0)
+df = df.to_frame()
+df = pd.DataFrame(df.to_records())
 df = df.astype(int)
-df.columns = ["community", "2012_Score", "2013_Score", "2014_Score", "2015_Score", "2016_Score"]
+df = df.rename(columns={'0': 'score'})
+df = df.sort_index(by=["date", "community"])
 df.to_csv("final_data/final_school_data.csv", index=False)
