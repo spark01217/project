@@ -86,6 +86,6 @@ def alter(request, code, alt_crime, alt_school, alt_income, alt_cta):
     else:
         res['cta'] = 'No'
 
-    res['price'] = predict(code, alt_crime, alt_school, alt_income, alt_cta)
+    res['price'] = merge.predict(code, alt_crime, alt_school, alt_income, alt_cta)
 
     return
