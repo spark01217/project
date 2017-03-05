@@ -5,8 +5,7 @@ import pandas as pd
 from .forms import SubmitNeighborhood, SubmitAlterations
 from .models import Neighborhood
 
-
-
+import merge
 
 def test(request):
     """The home page form. Prompts the user to select a neighborhood to analyze."""
