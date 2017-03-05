@@ -23,6 +23,15 @@ model = plm.PanelOLS(y = dfPanel['value'], x=dfPanel[['crime_freq', 'income', 's
             intercept=False, time_effects=False, dropped_dummies=True, verbose=True)
 
 def predict(crime, income, school, cta):
-    prediction = model.beta[0]*crime + model.beta[1]*income + model.beta[2]*school + model.beta[3]*cta + model.beta[4]*income*school
-    return prediction
+    if cta != 0 and cta != 1:
+        print("type cta: 0 for no cta station, or type cta: 1 for having a cta station.")
+    elif school < 0 or school > 100:
+        print("type school score between 0 and 100")
+    elif crime < 0:
+        print("crime rate must be positive")
+    elif income < 0:
+        print("median income must be positive")
+    else:
+        prediction = model.beta[0]*crime + model.beta[1]*income + model.beta[2]*school + model.beta[3]*cta + model.beta[4]*income*school
+        return prediction
 
