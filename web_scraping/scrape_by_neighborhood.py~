@@ -18,10 +18,8 @@ def scrape_chart_data(html):
     Takes a html file for each neighborhood on Trulia.
     Extracts the data from a graph of median sale pricing
     using BeautifulSoup
-
     Inputs:
         html - the html doc
-
     Returns:
         data_points (list of dicts)
     '''
@@ -94,7 +92,7 @@ for name in market_trends_pages.keys():
 
 for name in data.keys():
     trulia_id = name_to_link[name][-5:-1]
-    filename = 'med_sale_data/' + trulia_id + '_median_sale.csv'
+    filename = '../raw_file/School_Reports/med_sale_data/' + trulia_id + '_median_sale.csv'
     with open(filename, 'w') as output_file:
         fieldnames = ['date', 'value']
         # fieldnames = data[name][0].keys()
