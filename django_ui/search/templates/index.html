@@ -1,0 +1,47 @@
+{%  load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neighborhood Real Estate Pricing</title>
+    </head>
+    <body>
+
+        <div>
+            <h2>Neighborhood Real Estate Pricing</h2>
+        </div>
+
+        <div>
+            <p>Welcome! Use our calculator to make predictions about future median home prices based on
+            changes to school quality, crime rates, income levels, and CTA availability.</p>
+            <p>Start by selecting a neighborhood.</p>
+        </div>
+
+        <div class='frame'>
+            <form method="get" action="{% url 'fetch' %}">
+                <table class='form'>
+                    {{ select_form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+
+            {% if alter_form %}
+            <form method="get">
+                <table class='form'>
+                    {{ alter_form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+            {% endif %}
+
+        </div>
+
+        {% if res != None %}
+        <div>
+            <p> Here are the results: </p>
+            {{ res }}
+        </div>
+        {% endif %}
+
+    </body>
+</html>
+
