@@ -1,9 +1,8 @@
-from  import merge
-
+from final_data.merge import predict
 
 
 def fetch_current_data():
-    merge
+    predict()
     pass
 
 
