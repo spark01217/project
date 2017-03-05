@@ -19,6 +19,10 @@ df_final["interaction"] = df_final["score"]*df_final["income"]
 df_final = df_final.set_index(["community", "date"])
 dfPanel = df_final.to_panel()
 
-plm.PanelOLS(y = dfPanel['value'], x=dfPanel[['crime_freq', 'income', 'score', 'cta', 'interaction']],
-            intercept= True, time_effects=False, dropped_dummies=True, verbose=True)
+model = plm.PanelOLS(y = dfPanel['value'], x=dfPanel[['crime_freq', 'income', 'score', 'cta', 'interaction']],
+            intercept=False, time_effects=False, dropped_dummies=True, verbose=True)
+
+def predict(crime, income, school, cta):
+    prediction = model.beta[0]*crime + model.beta[1]*income + model.beta[2]*school + model.beta[3]*cta + model.beta[4]*income*school
+    return prediction
 
