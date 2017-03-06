@@ -2,14 +2,14 @@ import pandas as pd
 import functools
 import pandas.stats.plm as plm
 
-crime = pd.read_csv('final_data/final_crime_data.csv')
-income = pd.read_csv('final_data/final_income_data.csv')
-cta = pd.read_csv('final_data/final_cta_data.csv')
-school = pd.read_csv('final_data/final_school_data.csv')
-price = pd.read_csv('final_data/final_med_price_data.csv')
+crime = pd.read_csv('search/data/final_crime_data.csv')
+income = pd.read_csv('search/data/final_income_data.csv')
+cta = pd.read_csv('search/data/final_cta_data.csv')
+school = pd.read_csv('search/data/final_school_data.csv')
+price = pd.read_csv('search/data/final_med_price_data.csv')
 
 dfs = [crime, income, school, price]
-df_final = functools.reduce(lambda left,right: pd.merge(left,right,on=["date", "community"]), dfs)
+df_final = functools.reduce(lambda left, right: pd.merge(left,right,on=["date", "community"]), dfs)
 df_final = df_final.sort(["community", "date"])
 
 cta_dict = cta.set_index("community").T.to_dict(orient="index")["cta"]
@@ -19,8 +19,9 @@ df_final["interaction"] = df_final["score"]*df_final["income"]
 df_final = df_final.set_index(["community", "date"])
 dfPanel = df_final.to_panel()
 
-model = plm.PanelOLS(y = dfPanel['value'], x=dfPanel[['crime_freq', 'income', 'score', 'cta', 'interaction']],
-            intercept=False, time_effects=False, dropped_dummies=True, verbose=True)
+model = plm.PanelOLS(y=dfPanel['value'], x=dfPanel[['crime_freq', 'income', 'score', 'cta', 'interaction']],
+                     intercept=False, time_effects=False, dropped_dummies=True, verbose=True)
+
 
 def predict(crime, income, school, cta):
     if cta != 0 and cta != 1:
@@ -34,4 +35,3 @@ def predict(crime, income, school, cta):
     else:
         prediction = model.beta[0]*crime + model.beta[1]*income + model.beta[2]*school + model.beta[3]*cta + model.beta[4]*income*school
         return prediction
-

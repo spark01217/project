@@ -18,8 +18,7 @@ from django.contrib import admin
 from search import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^\?(?P<code>code=[0-9]+)$', views.fetch, name='fetch'),
-    url(r'^\?(?P<code>code=[0-9]+)(?P<alt_crime>&alt_crime=[0-9]+)(?P<alt_school>&alt_school=[0-9]+)(?P<alt_income>&alt_income=[0-9]+)(?P<alt_cta>&alt_cta=[0-1])$',
-        views.alter, name='alter')
+    # url(r'^$', views.home, name='home'),
+    # url(r'^$', views.fetch, name='fetch'),
+    url(r'^$', views.run, name='run'),
 ]

@@ -12,33 +12,32 @@
 
         <div>
             <p>Welcome! Use our calculator to make predictions about future median home prices based on
-            changes to school quality, crime rates, income levels, and CTA availability.</p>
-            <p>Start by selecting a neighborhood.</p>
+                school quality, crime rates, income levels, and CTA availability.</p>
         </div>
 
-        <div class='frame'>
-            <form method="get" action="{% url 'fetch' %}">
-                <table class='form'>
-                    {{ select_form }}
-                </table>
-                <input type="submit" value="Submit" />
-            </form>
+{#        <div class='frame'>#}
+{#            <form method="post" action={% url 'fetch' %}>#}
+{#                <table class='form'>#}
+{#                    {% csrf_token %}#}
+{#                    {{ select_form }}#}
+{#                </table>#}
+{#                <input type="submit" value="Submit" />#}
+{#            </form>#}
+{#        </div>#}
 
-            {% if alter_form %}
-            <form method="get">
+        <div>
+            <form method="post">
                 <table class='form'>
+                    {% csrf_token %}
                     {{ alter_form }}
                 </table>
                 <input type="submit" value="Submit" />
             </form>
-            {% endif %}
-
         </div>
 
-        {% if res != None %}
+        {% if results %}
         <div>
-            <p> Here are the results: </p>
-            {{ res }}
+            {{ results }}
         </div>
         {% endif %}
 
