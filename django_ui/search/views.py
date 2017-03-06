@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from .forms import SubmitNeighborhood, SubmitAlterations
 from .functions_for_django import fetch_new_price, fetch_current_data
@@ -27,7 +28,7 @@ def test(request):
     return render(request, 'index.html', context)
 
 
-def home(request):
+def home2(request):
     """Shows all the forms."""
     context = {}
 
@@ -86,26 +87,62 @@ def alter(request, alt_crime, alt_school, alt_income, alt_cta):
     return render(request, 'index.html', context)
 
 
-def run(request):
+def home(request):
+    return render(request, 'index.html', {})
+
+
+def calculate(request):
     context = {}
-    res = {}
-    price = None
 
     if request.method == 'POST':
-        alter_form = SubmitAlterations(request.POST)
+        form = SubmitAlterations(request.POST)
 
-        if alter_form.is_valid():
-            alt_crime = alter_form.cleaned_data['alt_crime']
-            alt_school = alter_form.cleaned_data['alt_school']
-            alt_income = alter_form.cleaned_data['alt_income']
-            alt_cta = alter_form.cleaned_data['alt_cta']
+        if form.is_valid():
+            alt_crime = int(form.cleaned_data['alt_crime'])
+            alt_school = int(form.cleaned_data['alt_school'])
+            alt_income = int(form.cleaned_data['alt_income'])
+            alt_cta = int(form.cleaned_data['alt_cta'])
 
             price = fetch_new_price(alt_crime, alt_school, alt_income, alt_cta)
+
+            context['results'] = 'The resulting Median Home Price is: ${:,.2f}'.format(price)
     else:
-        alter_form = SubmitAlterations()
+        form = SubmitAlterations()
 
-    context['alter_form'] = alter_form
-    if price:
-        context['results'] = 'The resulting Median Home Price is: ${:,.2f}'.format(price)
+    context['form'] = form
 
-    return render(request, 'index.html', context)
+    return render(request, 'calculate.html', context)
+
+
+def lookup(request):
+    context = {'results': False}
+
+    if request.method == 'POST':
+        form = SubmitNeighborhood(request.POST)
+
+        if form.is_valid():
+            code = int(form.cleaned_data['code'])
+            res = fetch_current_data(code)
+
+            context['crime'] = 'Crime Level: {}'.format(res['crime'])
+            context['school'] = 'School Quality: {}'.format(res['school'])
+            context['income'] = 'Income Level: ${:,.2f}'.format(res['income'])
+
+            if res['cta'] == 0:
+                has_cta = 'No'
+            else:
+                has_cta = 'Yes'
+
+            context['cta'] = 'Has CTA Station? ' + has_cta
+            context['price'] = 'Median Home Price: ${:,.2f}'.format(res['price'])
+
+            context['results'] = True
+
+    else:
+        form = SubmitNeighborhood()
+
+    context['form'] = form
+
+    return render(request, 'lookup.html', context)
+
+

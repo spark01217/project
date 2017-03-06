@@ -1,0 +1,41 @@
+{%  load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neighborhood Real Estate Pricing</title>
+    </head>
+    <body>
+
+        <div>
+            <h2>Neighborhood Real Estate Pricing</h2>
+        </div>
+
+        <div>
+            <p>Use our calculator to make predictions about future median home prices based on
+                school quality, crime rates, income levels, and CTA availability.</p>
+        </div>
+
+        <div>
+            <form method="post">
+                <table class='form'>
+                    {% csrf_token %}
+                    {{ form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+        {% if results %}
+        <div>
+            {{ results }}
+        </div>
+        {% endif %}
+
+        <div>
+            <br />
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+
+    </body>
+</html>
+

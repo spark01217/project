@@ -5,7 +5,7 @@ from .regression import predict
 def fetch_current_data(neighborhood_code):
     res = {}
 
-    datafile = 'data/current_data.csv'
+    datafile = 'search/data/current_data.csv'
     df = pd.read_csv(datafile)
     row = df[(df['community'] == neighborhood_code) & (df["date"] == 2016)]
 

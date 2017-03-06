@@ -1,0 +1,46 @@
+{%  load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neighborhood Real Estate Pricing</title>
+    </head>
+    <body>
+
+        <div>
+            <h2>Neighborhood Real Estate Pricing</h2>
+        </div>
+
+        <div>
+            <p>Look up the current school quality, crime rate, income level, and CTA availability
+            for a given neighborhood.</p>
+        </div>
+
+        <div>
+            <form method="post">
+                <table class='form'>
+                    {% csrf_token %}
+                    {{ form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+        {% if results %}
+        <div>
+            {{ crime }}<br />
+            {{ school }}<br />
+            {{ income }} <br />
+            {{ cta }}<br />
+            <br />
+            {{ price }}
+        </div>
+        {% endif %}
+
+        <div>
+            <br />
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+
+    </body>
+</html>
+

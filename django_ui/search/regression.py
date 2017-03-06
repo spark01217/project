@@ -34,4 +34,7 @@ def predict(crime, income, school, cta):
         print("median income must be positive")
     else:
         prediction = model.beta[0]*crime + model.beta[1]*income + model.beta[2]*school + model.beta[3]*cta + model.beta[4]*income*school
+        if prediction < 0:
+            prediction = 0
+
         return prediction
