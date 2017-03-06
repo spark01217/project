@@ -62,4 +62,4 @@ for i in range(2012, 2017):
 
 final_list = pd.DataFrame({'date': year, 'crime_freq': result, 'community': neighbor}, index = neighbor)
 final_list = final_list.sort_index(by=["date", "community"])
-final_list.to_csv('../final_data/final_crime_data.csv', index=False)
+final_list.to_csv('../django_ui/search/data/final_crime_data.csv', index=False)
