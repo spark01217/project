@@ -44,5 +44,5 @@ df = pd.DataFrame(df.to_records())
 df.columns = ["date", "community", "income"]
 df["community"] += 1
 
-df.to_csv('../final_data/final_income_data.csv', index=False)
+df.to_csv('../django_ui/search/data/final_income_data.csv', index=False)
 
