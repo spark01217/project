@@ -7,11 +7,11 @@
     <body>
 
         <div>
-            <h2>Neighborhood Real Estate Pricing</h2>
+            <h2><a href="{% url 'home' %}">Chicago Neighborhood Real Estate Pricing</a></h2>
         </div>
 
         <div>
-            <p>Use our calculator to make predictions about future median home prices based on
+            <p>Use our calculator to make predictions about median home prices based on
                 school quality, crime rates, income levels, and CTA availability.</p>
         </div>
 
@@ -30,11 +30,6 @@
             {{ results }}
         </div>
         {% endif %}
-
-        <div>
-            <br />
-            <a href="{% url 'home' %}">Home</a>
-        </div>
 
     </body>
 </html>

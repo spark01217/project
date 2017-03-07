@@ -105,7 +105,7 @@ def calculate(request):
 
             price = fetch_new_price(alt_crime, alt_school, alt_income, alt_cta)
 
-            context['results'] = 'The resulting Median Home Price is: ${:,.2f}'.format(price)
+            context['results'] = 'Predicted Median Home Price: ${:,.2f}'.format(price)
     else:
         form = SubmitAlterations()
 
@@ -124,17 +124,16 @@ def lookup(request):
             code = int(form.cleaned_data['code'])
             res = fetch_current_data(code)
 
-            context['crime'] = 'Crime Level: {}'.format(res['crime'])
-            context['school'] = 'School Quality: {}'.format(res['school'])
-            context['income'] = 'Income Level: ${:,.2f}'.format(res['income'])
+            context['crime'] = '{:,} (per 100,000 people)'.format(res['crime'])
+            context['school'] = '{}%'.format(res['school'])
+            context['income'] = '${:,.2f}'.format(res['income'])
 
             if res['cta'] == 0:
-                has_cta = 'No'
+                context['cta'] = 'No'
             else:
-                has_cta = 'Yes'
+                context['cta'] = 'Yes'
 
-            context['cta'] = 'Has CTA Station? ' + has_cta
-            context['price'] = 'Median Home Price: ${:,.2f}'.format(res['price'])
+            context['price'] = '${:,.2f}'.format(res['price'])
 
             context['results'] = True
 

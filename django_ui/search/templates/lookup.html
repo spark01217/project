@@ -7,7 +7,7 @@
     <body>
 
         <div>
-            <h2>Neighborhood Real Estate Pricing</h2>
+            <h2><a href="{% url 'home' %}">Chicago Neighborhood Real Estate Pricing</a></h2>
         </div>
 
         <div>
@@ -27,18 +27,62 @@
 
         {% if results %}
         <div>
-            {{ crime }}<br />
-            {{ school }}<br />
-            {{ income }} <br />
-            {{ cta }}<br />
-            <br />
-            {{ price }}
+            <table>
+                <tr>
+                    <td align="right">
+                        Crime Level:
+                    </td>
+                    <td align="left">
+                        {{ crime }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        School Quality:
+                    </td>
+                    <td align="left">
+                        {{ school }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        Income Level:
+                    </td>
+                    <td align="left">
+                        {{ income }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        Has CTA Station?
+                    </td>
+                    <td align="left">
+                        {{ cta }}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        Median Home Price:
+                    </td>
+                    <td align="left">
+                        {{ price }}
+                    </td>
+                </tr>
+
+            </table>
         </div>
         {% endif %}
 
         <div>
-            <br />
-            <a href="{% url 'home' %}">Home</a>
+            <p>Data provided by <a href="http://www.trulia.com">Trulia</a> </p>
         </div>
 
     </body>
