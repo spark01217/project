@@ -88,7 +88,7 @@ def alter(request, alt_crime, alt_school, alt_income, alt_cta):
 
 
 def home(request):
-    return render(request, 'index.html', {})
+    return render(request, 'index_frames.html', {})
 
 
 def calculate(request):

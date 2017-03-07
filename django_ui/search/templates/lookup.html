@@ -7,12 +7,12 @@
     <body>
 
         <div>
-            <h2><a href="{% url 'home' %}">Chicago Neighborhood Real Estate Pricing</a></h2>
+            <h2>Look Up Chicago Neighborhood Data</h2>
         </div>
 
         <div>
             <p>Look up the current school quality, crime rate, income level, and CTA availability
-            for a given neighborhood.</p>
+            for a given neighborhood in Chicago.</p>
         </div>
 
         <div>
@@ -81,9 +81,12 @@
         </div>
         {% endif %}
 
-        <div>
-            <p>Data provided by <a href="http://www.trulia.com">Trulia</a> </p>
-        </div>
+        <center>
+            <div>
+                <p>Data provided by <a href="http://www.trulia.com" target="_blank">Trulia</a>
+                    and <a href="http://data.cityofchicago.org" target="_blank">City of Chicago</a></p>
+            </div>
+        </center>
 
     </body>
 </html>
