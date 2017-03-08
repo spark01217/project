@@ -23,7 +23,7 @@ class SubmitAlterations(forms.Form):
                                     max_value=100,
                                     required=True,
                                     help_text='(0-100)')
-    alt_income = forms.IntegerField(label='Income Level ($)',
+    alt_income = forms.IntegerField(label='Income Level',
                                     min_value=0,
                                     required=True,
                                     help_text='(Median Household Income)')
