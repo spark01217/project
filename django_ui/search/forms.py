@@ -27,6 +27,6 @@ class SubmitAlterations(forms.Form):
                                     min_value=0,
                                     required=True,
                                     help_text='(Median Household Income)')
-    alt_cta = forms.ChoiceField(label='Has CTA Station?',
+    alt_cta = forms.ChoiceField(label='Has CTA L Station?',
                                 choices=[(1, 'Yes'), (0, 'No')],
                                 required=True)
