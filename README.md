@@ -18,7 +18,7 @@ has a CTA L station, panel regression using GLS was executed.
 ##Pulling up the Website##
 Go into the django_ui directory, and then input <br />
 ```
-python manage.py runserver <br />
+python manage.py runserver
 ```
 in the terminal. <br />
 And then go to http://127.0.0.1:8000 in a browser.
@@ -47,7 +47,7 @@ sudo apt-get install gdal-bin
 ```
 then, install pyshp library, and finally the python requirements for the codes with 
 ```
-sudo pip3 install pyshp <br />
+sudo pip3 install pyshp
 sudo pip3 install -r setup_library/requirements.txt
 ```
 
