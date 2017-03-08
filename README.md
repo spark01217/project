@@ -17,7 +17,9 @@ has a CTA L station, panel regression using GLS was executed.
 
 ##Pulling up the Website##
 Go into the django_ui directory, and then input <br />
+'''
 python manage.py runserver <br />
+'''
 in the terminal. <br />
 And then go to http://127.0.0.1:8000 in a browser.
 
@@ -40,11 +42,12 @@ Python Libraries including
 
 In order to use the chicago_neighborhood_finder library, which converts a set of latitude and longitude (i.e. (92.3124, 41.3471))
 into the name of Chicago neighborhood (i.e. West Englewood), first install the library gdal.
-
+'''
 sudo apt-get install gdal-bin
-
+'''
 then, install pyshp library, and finally the python requirements for the codes with 
-
+'''
 sudo pip3 install pyshp <br />
 sudo pip3 install -r setup_library/requirements.txt
+'''
 
