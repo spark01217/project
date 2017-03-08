@@ -1,15 +1,19 @@
 import openpyxl
 import pandas as pd
 """
-The geocoding library cannot be installed in CSIL desktops.
-Please install them via your VM.
+In order to convert the location of the CTA L stations
+into the name of the neighborhood which each station belongs,
+I have used the codes which belong to python library "chicago_neighborhood_finder,"
+created by a data scientist "Craig. M. Booth."
+Since the chicago_community_areas.py is written for Python 2.7, I have converted
+some of the codes so that they could be run in Python 3.
 
-sudo apt-get install gdal-bin (VM)
-sudo pip3 install -r setup_library/requirements.txt (VM)
-sudo pip3 install pyshp (VM)
-
-The installation will fail if you don't keep the installation order.
+The "chicago_community_areas.py" should be run to import the geocoding functions,
+and get_community_area_coords() must be run to generate the dictionary of which
+keys are names of neighborhood and the values are list of lists containing longitude and 
+latitude.
 """
+
 run chicago_community_areas.py
 areas = get_community_area_coords()
 
