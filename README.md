@@ -1,12 +1,12 @@
-CMSC 12200 Winter
-Final Project: Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables
+CMSC 12200 Winter <br />
+Final Project: Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables <br />
 
-Edward Hayes
-Sangwoo Park
-Jinsung Kim
-Zhipeng Zhu
+Edward Hayes <br />
+Sangwoo Park <br />
+Jinsung Kim <br />
+Zhipeng Zhu <br />
 
-<Abstract>
+##Abstract##
 Besides the characteristics of the dwelling unit itself, urban residential housing prices depend on neighborhood
 characteristics such as crime rate, the median household income of the neighborhood, transportation accessibility,
 quality of education and etc. This study estimates the impact of neighborhood characteristics on housing prices in
@@ -14,12 +14,12 @@ the city of Chicago. By using data of home prices and socioeconomic factors of n
 including median household income, average public school transcript score, crime rate and whether the neighborhood
 has a CTA L station, panel regression using GLS was executed.
 
-<Website>
-Our website displays
-1) Most recent (2016) median home price and values of socioeconomic factors for different neighborhoods
-2) Estimated median home price for an arbitrary neighborhood with user-input values of socioeconomic factors
+##Website##
+Our website displays <br />
+1) Most recent (2016) median home price and values of socioeconomic factors for different neighborhoods <br />
+2) Estimated median home price for an arbitrary neighborhood with user-input values of socioeconomic factors <br />
 
-<Installation>
+##Installation##
 In order to run the codes for web scraping, data cleaning and pulling up the website,
 Python Libraries including
 
@@ -38,12 +38,12 @@ sudo apt-get install gdal-bin
 
 then, install pyshp library, and finally the python requirements for the codes with 
 
-sudo pip3 install pyshp
+sudo pip3 install pyshp <br />
 sudo pip3 install -r setup_library/requirements.txt
 
-<Pulling up the Website>
-Go into the django_ui directory, and then input
--- python manage.py runserver
-in the terminal.
+##Pulling up the Website##
+Go into the django_ui directory, and then input <br />
+-- python manage.py runserver <br />
+in the terminal. <br />
 And then go to http://127.0.0.1:8000 in a browser.
 
