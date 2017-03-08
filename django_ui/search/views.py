@@ -43,7 +43,7 @@ def lookup(request):
 
             context['crime'] = '{:,} (per 100,000 people)'.format(res['crime'])
             context['school'] = '{}%'.format(res['school'])
-            context['income'] = '${:,.2f}'.format(res['income'])
+            context['income'] = '${:,.2f} (Median Household)'.format(res['income'])
 
             if res['cta'] == 0:
                 context['cta'] = 'No'
