@@ -1,6 +1,6 @@
 # Title #
-CMSC 12200 Winter <br />
-Final Project: Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables <br />
+Winter 2017 <br />
+Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables <br />
 
 Edward Hayes <br />
 Sangwoo Park <br />
