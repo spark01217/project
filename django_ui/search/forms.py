@@ -25,7 +25,8 @@ class SubmitAlterations(forms.Form):
                                     help_text='(0-100)')
     alt_income = forms.IntegerField(label='Income Level ($)',
                                     min_value=0,
-                                    required=True)
+                                    required=True,
+                                    help_text='(Median Household Income)')
     alt_cta = forms.ChoiceField(label='Has CTA Station?',
                                 choices=[(1, 'Yes'), (0, 'No')],
                                 required=True)
