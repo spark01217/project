@@ -38,3 +38,24 @@ def predict(crime, income, school, cta):
             prediction = 0
 
         return prediction
+
+
+def fetch_current_data(neighborhood_code):
+    res = {}
+
+    datafile = 'search/data/current_data.csv'
+    df = pd.read_csv(datafile)
+    row = df[(df['community'] == neighborhood_code) & (df["date"] == 2016)]
+
+    res['crime'] = int(row.iloc[0]['crime_freq'])
+    res['school'] = int(row.iloc[0]['score'])
+    res['income'] = int(row.iloc[0]['income'])
+    res['price'] = int(row.iloc[0]['value'])
+
+    if int(row.iloc[0]['cta']) == 1:
+        res['cta'] = 'Yes'
+    else:
+        res['cta'] = 'No'
+
+    return res
+
