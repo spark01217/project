@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 
 from .forms import SubmitNeighborhood, SubmitAlterations
-from .functions_for_django import fetch_new_price, fetch_current_data
+from .regression import predict, fetch_current_data
 
 
 def home(request):
@@ -21,7 +20,7 @@ def calculate(request):
             alt_income = int(form.cleaned_data['alt_income'])
             alt_cta = int(form.cleaned_data['alt_cta'])
 
-            price = fetch_new_price(alt_crime, alt_school, alt_income, alt_cta)
+            price = predict(alt_crime, alt_income, alt_school, alt_cta)
 
             context['results'] = 'Predicted Median Home Price: ${:,.2f}'.format(price)
     else:
