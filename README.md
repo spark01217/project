@@ -17,7 +17,7 @@ has a CTA L station, panel regression using GLS was executed.
 
 ##Pulling up the Website##
 Go into the django_ui directory, and then input <br />
--- python manage.py runserver <br />
+python manage.py runserver <br />
 in the terminal. <br />
 And then go to http://127.0.0.1:8000 in a browser.
 
