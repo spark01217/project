@@ -8,10 +8,10 @@ Zhipeng Zhu
 
 <Abstract>
 Besides the characteristics of the dwelling unit itself, urban residential housing prices depend on neighborhood
-characteristics such as crime cate, the median household income of the neighborhood, transportation accessibility,
+characteristics such as crime rate, the median household income of the neighborhood, transportation accessibility,
 quality of education and etc. This study estimates the impact of neighborhood characteristics on housing prices in
 the city of Chicago. By using data of home prices and socioeconomic factors of neighborhoods from 2012 to 2016,
-including median household income, average public high school transcript score, crime rate and whether the neighborhood
+including median household income, average public school transcript score, crime rate and whether the neighborhood
 has a CTA L station, panel regression using GLS was executed.
 
 <Website>
@@ -43,7 +43,7 @@ sudo pip3 install -r setup_library/requirements.txt
 
 <Pulling up the Website>
 Go into the django_ui directory, and then input
-run python manage.py runserver 
+-- python manage.py runserver
 in the terminal.
 And then go to http://127.0.0.1:8000 in a browser.
 
