@@ -1,3 +1,4 @@
+# Title #
 CMSC 12200 Winter <br />
 Final Project: Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables <br />
 
@@ -13,6 +14,12 @@ quality of education and etc. This study estimates the impact of neighborhood ch
 the city of Chicago. By using data of home prices and socioeconomic factors of neighborhoods from 2012 to 2016,
 including median household income, average public school transcript score, crime rate and whether the neighborhood
 has a CTA L station, panel regression using GLS was executed.
+
+##Pulling up the Website##
+Go into the django_ui directory, and then input <br />
+-- python manage.py runserver <br />
+in the terminal. <br />
+And then go to http://127.0.0.1:8000 in a browser.
 
 ##Website##
 Our website displays <br />
@@ -40,10 +47,4 @@ then, install pyshp library, and finally the python requirements for the codes w
 
 sudo pip3 install pyshp <br />
 sudo pip3 install -r setup_library/requirements.txt
-
-##Pulling up the Website##
-Go into the django_ui directory, and then input <br />
--- python manage.py runserver <br />
-in the terminal. <br />
-And then go to http://127.0.0.1:8000 in a browser.
 
