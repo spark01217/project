@@ -1,5 +1,5 @@
-# Modeling Chicago Neighborhood Home Prices <br />
-with Socioeconomic Variables #
+# Modeling Chicago Neighborhood Home Prices #
+# with Socioeconomic Variables #
 Winter 2017 <br />
 
 Edward Hayes <br />
