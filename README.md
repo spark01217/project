@@ -1,6 +1,5 @@
-# Title #
+# Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables #
 Winter 2017 <br />
-Modeling Chicago Neighborhood Home Prices with Socioeconomic Variables <br />
 
 Edward Hayes <br />
 Sangwoo Park <br />
