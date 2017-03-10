@@ -51,11 +51,7 @@ def fetch_current_data(neighborhood_code):
     res['school'] = int(row.iloc[0]['score'])
     res['income'] = int(row.iloc[0]['income'])
     res['price'] = int(row.iloc[0]['value'])
-
-    if int(row.iloc[0]['cta']) == 1:
-        res['cta'] = 'Yes'
-    else:
-        res['cta'] = 'No'
+    res['cta'] = int(row.iloc[0]['cta'])
 
     return res
 
