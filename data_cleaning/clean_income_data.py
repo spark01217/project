@@ -1,11 +1,15 @@
 import pandas as pd
+
 df = pd.read_csv("../raw_data/income.csv")
+# Leave only columns of interest
 df = df.drop(df.columns[[1,2,3,4]], axis = 1)
 df.columns = ["community", "2010", "2011", "2012"]
 df = df[df['community'] == "Median household income"]
+
 df = df.reset_index(drop=True)
 l = list(range(1, 78))
 df["community"] = pd.Series(l)
+# Some hard-code fixes
 df = df.drop(df.index[77])
 df["2010"] = df["2010"].str.replace("$", "")
 df["2011"] = df["2011"].str.replace("$", "")
@@ -22,6 +26,7 @@ e_2014 = []
 e_2015 = []
 e_2016 = []
 
+# Linear extrapolation for income data
 for i in range(len(df)):
 	a = df['2011'][i] - df['2010'][i]
 	b = df['2012'][i] - df['2011'][i]

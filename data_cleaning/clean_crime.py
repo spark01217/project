@@ -2,12 +2,18 @@ import csv
 import pandas as pd
 from math import isnan
 
-data = pd.read_csv("../raw_file/Cleaned_Crimes.csv")
+# Crime data courtsey of City of Chicago databse
+# Columns on FBI Code for each crime, year of crime, and area of crime
+data = pd.read_csv("../raw_file/Crimes.csv")
+
+# Importing community area population data for linear extrapolation
 population = pd.read_csv("Community Area populations.csv", index_col = "Num")
 
 
 data = data[['Community Area', 'FBI Code', 'Year']]
 
+# Due to lack of census data for each specific year, used linear extrapolation
+# to determine population by area for each year in 2012-2016
 pop = {2012: [], 2013:[], 2014:[], 2015:[], 2016: []}
 pop_2010 = list(population["2010"])
 pop_diff = list(population["Difference"])
@@ -18,8 +24,10 @@ for i in range(len(pop_2010)):
 	pop[2015].append(pop_2010[i] + (pop_diff[i]*5)/10)
 	pop[2016].append(pop_2010[i] + (pop_diff[i]*6)/10)
 
+
 data_dict= {}
 
+# Clean data for any missing values and nulls
 for i in range (2012, 2017):
 	is_year = data["Year"] == i
 	data_dict[i] = data[is_year]
@@ -27,9 +35,17 @@ for i in range (2012, 2017):
 	data_dict[i] = data_dict[i][data_dict[i]["Community Area"] != 0.0]
 
 def crime_frequency(dat, year):
+	'''
+	Takes data and year as input; returns crime, a dictionary that contains 
+	index crime (crime designated as dangerous by FBI) frequency per 100,000 people
+	for each area
+	'''
 	crime = {}
+	# Nested dictionary to keep count per area
 	for comarea in dat[year]["Community Area"].unique():
 		crime[comarea] = {"Murder": 0, "Assault": 0, "Theft": 0, "Index": 0}
+	# Necessary to turn these into list; if not, pandas dataframe columns for some reason
+	# unnecesarily elongates runtime of code
 	fbi = list(dat[year]["FBI Code"])
 	com = list(dat[year]["Community Area"])
 	for i in range(len(fbi)):
@@ -53,6 +69,7 @@ def crime_frequency(dat, year):
 result = []
 year = [] 
 neighbor = []
+# Formatting
 for i in range(2012, 2017):
 	a = crime_frequency(data_dict, i)
 	for j in range(1, 78):
