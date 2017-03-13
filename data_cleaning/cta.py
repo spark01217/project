@@ -1,7 +1,17 @@
 import pandas as pd
 
+# import raw data with pandas library
 dta = pd.read_csv('../raw_file/CTA_Ridership.csv')
-# a dictionary containing the area code for the stations
+
+'''
+Create a dictionary containing the area code for the stations
+There was no raw data containing the locations for the CTA L stations,
+while the only available dataset "CTA - 'L' (Rail) Stations - KML 
+(Deprecated February 2015)" is an outdated dataset, so that many of the stations
+in the dataset is closed or has moved to a new address. Therefore, I have manually
+searched the neighborhoods where the stations in our dataset belong.
+'''
+
 name = {'18th': 31,
  '35-Bronzeville-IIT': 35,
  '35th/Archer': 59,
@@ -126,6 +136,11 @@ name = {'18th': 31,
  'Western/Milwaukee': 22,
  'Wilson': 3}
 
+# I have created a new pandas dataframe
+# where a column is list of neighborhood codes
+# and another is a binary variable "cta"
+# which is 0 if there is no cta station in the neighborhood
+# and 1 if there exists a cta station in the neighborhood.
 dta = pd.DataFrame()
 dta["community"] = pd.Series(list(range(1,78)))
 dta["cta"] = 0
