@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("../raw_data/income.csv")
+df = pd.read_csv("../raw_file/income.csv")
 # Leave only columns of interest
 df = df.drop(df.columns[[1,2,3,4]], axis = 1)
 df.columns = ["community", "2010", "2011", "2012"]
