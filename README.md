@@ -6,7 +6,7 @@ Sangwoo Park <br />
 Jinsung Kim <br />
 Zhipeng Zhu <br />
 
-##Abstract##
+## Abstract ##
 Besides the characteristics of the dwelling unit itself, urban residential housing prices depend on neighborhood
 characteristics such as crime rate, the median household income of the neighborhood, transportation accessibility,
 quality of education and etc. This study estimates the impact of neighborhood characteristics on housing prices in
@@ -14,7 +14,7 @@ the city of Chicago. By using data of home prices and socioeconomic factors of n
 including median household income, average public school transcript score, crime rate and whether the neighborhood
 has a CTA L station, panel regression using GLS was executed.
 
-##Pulling up the Website##
+## Pulling up the Website ##
 Go into the django_ui directory, and then input <br />
 ```
 python manage.py runserver
@@ -22,12 +22,12 @@ python manage.py runserver
 in the terminal. <br />
 And then go to http://127.0.0.1:8000 in a browser.
 
-##Website##
+## Website ##
 Our website displays <br />
 1) Most recent (2016) median home price and values of socioeconomic factors for different neighborhoods <br />
 2) Estimated median home price for an arbitrary neighborhood with user-input values of socioeconomic factors <br />
 
-##Installation##
+## Installation ##
 In order to run the codes for web scraping, data cleaning and pulling up the website,
 Python Libraries including
 
@@ -49,10 +49,10 @@ then, install pyshp library, and finally the python requirements for the codes w
 sudo pip3 install pyshp
 sudo pip3 install -r setup_library/requirements.txt
 ```
-##Model Building and Diagnostics##
+## Model Building and Diagnostics ##
 The PDF file "Modeling Chicago Home Prices" is written by Sangwoo Park. The document provides the rationale for choosing GLS random effects model, and including interaction effect between the variable income and school scores in predicting median home prices by neighborhoods.
 
-##Codes for Preprocessing Data##
+## Codes for Preprocessing Data ##
 - In the "web_scrapping" folder, please run "scrape_by_neighborhood" to scrape median home price data from Trulia.
 - Then, run the below files to clean the raw datasets in the "raw_file" folder.
   - clean_crime.py
