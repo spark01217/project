@@ -54,9 +54,11 @@ The PDF file "Modeling Chicago Home Prices" is written by Sangwoo Park. The docu
 
 ## Codes for Preprocessing Data ##
 - In the "web_scrapping" folder, please run "scrape_by_neighborhood" to scrape median home price data from Trulia.
-- Then, run the below files to clean the raw datasets in the "raw_file" folder.
+- Then, run the below files to clean the raw datasets in the "raw_file" folder. 
   - clean_crime.py
   - clean_income_data.py
   - clean_med_sale_data.py
   - clean_school.py
   - cta.py
+  
+  All preprocessed data goes to the "django_ui/search/data" folder.
