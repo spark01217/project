@@ -1,5 +1,7 @@
 import openpyxl
 import pandas as pd
+import os
+exec(open("chicago_community_areas.py").read())
 """
 In order to convert the location of the CTA L stations
 into the name of the neighborhood which each station belongs,
@@ -13,11 +15,9 @@ and get_community_area_coords() must be run to generate the dictionary of which
 keys are names of neighborhood and the values are list of lists containing longitude and 
 latitude.
 """
-
-run chicago_community_areas.py
 areas = get_community_area_coords()
 
-df = pd.read_csv('school_quality.csv', header=None)
+df = pd.read_csv('../raw_file/school_quality.csv', header=None)
 
 lng1 = df.loc[:,1][0:1218]
 lng2 = df.loc[:,1][1218:] 
