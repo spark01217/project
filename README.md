@@ -51,3 +51,12 @@ sudo pip3 install -r setup_library/requirements.txt
 ```
 ##Model Building and Diagnostics##
 The PDF file "Modeling Chicago Home Prices" is written by Sangwoo Park. The document provides the rationale for choosing GLS random effects model, and including interaction effect between the variable income and school scores in predicting median home prices by neighborhoods.
+
+##Codes for Preprocessing Data##
+- In the "web_scrapping" folder, please run "scrape_by_neighborhood" to scrape median home price data from Trulia.
+- Then, run the below files to clean the raw datasets in the "raw_file" folder.
+  - clean_crime.py
+  - clean_income_data.py
+  - clean_med_sale_data.py
+  - clean_school.py
+  - cta.py
