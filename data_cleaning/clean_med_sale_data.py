@@ -10,7 +10,7 @@ excels = []
 # I concatenated all the files in the list "excels" into a single dataframe.
 for name in sorted(excel_names):
    alt = pd.read_csv(name)
-   alt["community"] = name[14:18]
+   alt["community"] = name[26:30]
    excels.append(alt)
 combined = pd.concat(excels)
 
@@ -18,7 +18,6 @@ combined = pd.concat(excels)
 # neighborhood in the file of which columns are name of the neighborhood and
 # neighborhood code numbers. 
 id = pd.read_csv("id_name.csv")
-id.name[id.name=="Lake view"] = "Lake View"
 
 # create dictionary that maps the names of neighborhoods to community codes
 m = {}
@@ -28,9 +27,38 @@ for i in range(len(id)):
 # Using the dictionary, I convert the community name into area code.
 combined["community"] = combined["community"].astype(int)
 combined["community"].replace(m, inplace=True)
-map = pd.read_csv('data/Community Area populations.csv')
+
+map = pd.read_csv('Community Area populations.csv')
+map["Community Area"] = map["Community Area"].str.strip()
+
+m = {}
 for i in range(len(map)):
     m[map["Community Area"][i].strip()] = map["Num"][i]
+
+m["Canaryville"] = 61
+m["Belmont Central"] = 19 
+m["Cragin"] = 19
+m["DePaul"] = 7
+m["Goose Island"] = 8
+m["Greektown"] = 28
+m["Jeffrey Manor"] = 51 
+m["Lakeview"] = 6
+m["Pilsen"] = 31
+m["Ravenswood"] = 4 
+m["Roscoe Village"] = 5 
+m["Sauganash"] = 8
+m["Scottsdale"] = 70
+m["Tri-Taylor"] = 28
+m["Ukranian Village"] = 28 
+m["University Village / Little Italy"] = 28
+m["Washington Heights / Brainerd"] = 73
+m["Bucktown"] = 22
+m["Galewood"] = 25
+m["Little Village"] = 30
+m["Back of the Yards"] = 61
+m["West Rogers Park"] = 2 
+m["Wicker Park"] = 24
+
 combined["community"].replace(m, inplace = True)
 
 # Keep the observations if the date is between year 2012 to 2016,
