@@ -49,4 +49,5 @@ then, install pyshp library, and finally the python requirements for the codes w
 sudo pip3 install pyshp
 sudo pip3 install -r setup_library/requirements.txt
 ```
-
+##Model Building and Diagnostics##
+The PDF file "Modeling Chicago Home Prices" is written by Sangwoo Park. The document provides the rationale for choosing GLS random effects model, and including interaction effect between the variable income and school scores in predicting median home prices by neighborhoods.
